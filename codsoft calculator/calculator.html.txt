@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ananya's Calculator</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f7;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #333;
+    }
+    .calculator {
+      background-color: #1c1c1e;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .display {
+      background-color: #3a3a3c;
+      color: #fff;
+      text-align: right;
+      padding: 15px;
+      font-size: 2.5em;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 70px);
+      gap: 12px;
+    }
+    .buttons button {
+      padding: 20px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 50%;
+      background-color: #505050;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .buttons button:hover {
+      background-color: #6b6b6d;
+    }
+    .buttons .operator {
+      background-color: #ff9500;
+    }
+    .buttons .operator:hover {
+      background-color: #ffa733;
+    }
+    .buttons .equal {
+      background-color: #34c759;
+      color: white;
+    }
+    .buttons .equal:hover {
+      background-color: #48d774;
+    }
+    .buttons .clear {
+      background-color: #d4d4d2;
+      color: black;
+    }
+    .buttons .clear:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ananya's Calculator</h1>
+  <div class="calculator">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="operator" onclick="append('/')">÷</button>
+      <button class="operator" onclick="append('*')">×</button>
+      <button onclick="del()">⌫</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button class="operator" onclick="append('-')">−</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button class="operator" onclick="append('+')">+</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button class="equal" onclick="calculate()">=</button>
+
+      <button style="grid-column: span 2" onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+
+    function append(character) {
+      if (display.innerText === '0' || display.innerText === 'Error') {
+        display.innerText = character;
+      } else {
+        display.innerText += character;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = '0';
+    }
+
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch {
+        display.innerText = 'Error';
+      }
+    }
+
+    function del() {
+      if (display.innerText.length > 1) {
+        display.innerText = display.innerText.slice(0, -1);
+      } else {
+        display.innerText = '0';
+      }
+    }
+  </script>
+</body>
+</html>
